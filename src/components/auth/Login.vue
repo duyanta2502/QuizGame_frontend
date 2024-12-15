@@ -8,7 +8,7 @@
                             <div class="card-body p-3 p-md-4 p-xl-5">
                                 <div class="text-center mb-3">
                                     <a href="#!">
-                                        <img src="https://www.itsolutionstuff.com/assets/images/footer-logo-2.png"
+                                        <img src="https://assets-cdn.kahoot.it/auth/assets/topbar_logo_purple-BNw_v6xK.svg"
                                             alt="Logo" width="250">
                                     </a>
                                 </div>
@@ -50,6 +50,29 @@
                                                 <button class="btn btn-primary btn-lg" type="submit">Login</button>
                                             </div>
                                         </div>
+
+                                        <div class="col-12">
+                                            <div class="d-grid my-3">
+                                                <button class="btn btn-light btn-lg border" type="button"
+                                                    id="google-login">
+                                                    <img src="https://assets-cdn.kahoot.it/auth/assets/google-D1qVgiZr.svg"
+                                                        alt="Google Logo" width="20" class="me-2">
+                                                    Continue with Google
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="d-grid my-3">
+                                                <button class="btn btn-light btn-lg border" type="button"
+                                                    id="github-login">
+                                                    <img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png"
+                                                        alt="Github Logo" width="20" class="me-2">
+                                                    Continue with Github
+                                                </button>
+                                            </div>
+                                        </div>
+
                                         <div class="col-12">
                                             <p class="m-0 text-secondary text-center">Don't have an account? <a
                                                     href="/register" class="link-primary text-decoration-none">Sign
@@ -67,12 +90,13 @@
 </template>
 
 <script>
-    export default {}
+export default {}
 </script>
 
 <style scoped>
-    @import './src/assets/CSS/auth.css';
-    .msg-error{
-        color: red
-    }
+@import './src/assets/CSS/auth.css';
+
+.msg-error {
+    color: red
+}
 </style>
