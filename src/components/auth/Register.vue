@@ -102,7 +102,7 @@ export default {
       password_confirmation: '',
     });
 
-    // Hàm xử lý submit
+    // xử lý submit
     const handleSubmit = async () => {
       try {
         // Gửi request POST đến backend
@@ -128,8 +128,6 @@ export default {
 </script>
 
 <style scoped>
-@import './src/assets/CSS/auth.css';
-
 .msg-error {
     color: red
 }

@@ -20,18 +20,20 @@
                                     <div class="row gy-2 overflow-hidden">
                                         <div class="col-12">
                                             <div class="form-floating mb-3">
-                                                <input type="email" class="form-control" name="email" id="email"
+                                                <input type="email" v-model="formData.email" class="form-control" name="email" id="email"
                                                     placeholder="name@example.com" required>
                                                 <label for="email" class="form-label">Email Address</label>
                                             </div>
                                         </div>
+
                                         <div class="col-12">
                                             <div class="form-floating mb-3">
-                                                <input type="password" class="form-control" name="password"
+                                                <input type="password" v-model="formData.password" class="form-control" name="password"
                                                     id="password" placeholder="Password" required>
                                                 <label for="password" class="form-label">Password</label>
                                             </div>
                                         </div>
+
                                         <div class="col-12">
                                             <div class="d-flex gap-2 justify-content-between">
                                                 <div class="form-check">
@@ -42,9 +44,11 @@
                                                     </label>
                                                 </div>
                                                 <a href="/forgot-password"
-                                                    class="link-primary text-decoration-none">Forgot password?</a>
+                                                    class="link-primary text-decoration-none">Forgot password?
+                                                </a>
                                             </div>
                                         </div>
+
                                         <div class="col-12">
                                             <div class="d-grid my-3">
                                                 <button class="btn btn-primary btn-lg" type="submit">Login</button>
@@ -75,9 +79,11 @@
 
                                         <div class="col-12">
                                             <p class="m-0 text-secondary text-center">Don't have an account? <a
-                                                    href="/register" class="link-primary text-decoration-none">Sign
-                                                    up</a></p>
+                                                    href="/register" class="link-primary text-decoration-none">Signup
+                                                </a>
+                                            </p>
                                         </div>
+
                                     </div>
                                 </form>
                             </div>
@@ -90,12 +96,55 @@
 </template>
 
 <script>
-export default {}
+import axios from "axios";
+import { reactive, ref } from "vue";
+
+export default {
+  name: "Login",
+  setup() {
+    const formData = reactive({
+      email: "",
+      password: "",
+    });
+
+    const errorMessage = ref("");
+
+    const handleLogin = async () => {
+      try {
+        // Gửi request đăng nhập đến API
+        const response = await axios.post("http://localhost:8000/api/login", formData, {
+          headers: {
+            Accept: "application/json",
+          },
+        });
+
+        // Lưu token vào localStorage
+        localStorage.setItem("auth_token", response.data.token);
+
+        alert("Đăng nhập thành công!");
+        console.log("User Info:", response.data.user);
+
+        // Điều hướng sang trang chính hoặc dashboard
+        window.location.href = "/";
+      } catch (error) {
+        if (error.response && error.response.status === 401) {
+          errorMessage.value = "Email hoặc mật khẩu không chính xác!";
+        } else {
+          errorMessage.value = "Đã xảy ra lỗi. Vui lòng thử lại!";
+        }
+      }
+    };
+
+    return {
+      formData,
+      handleLogin,
+      errorMessage,
+    };
+  },
+};
 </script>
 
 <style scoped>
-@import './src/assets/CSS/auth.css';
-
 .msg-error {
     color: red
 }
